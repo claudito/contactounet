@@ -145,6 +145,15 @@ echo json_encode($result);
 
 
     break;
+
+      case  'forma_pago':
+
+$query  = " SELECT id, Nombre, Codigo, EsEfectivo, EsPagado, idSerie FROM FormasPago";
+$result  = $funciones->query($query);
+
+echo json_encode($result);
+
+    break;
 	
 	default:
 echo "opcion no disponible";

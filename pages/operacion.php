@@ -1,11 +1,3 @@
-<!-- Selectize -->
-<link rel="stylesheet" href="https://selectize.github.io/selectize.js/css/selectize.default.css" >
-<script src="https://selectize.github.io/selectize.js/js/selectize.js"></script>
-
-
-
-
-
 <!-- Formulario de Registro -->
 <form id="registro" autocomplete="off">
 
@@ -24,20 +16,20 @@
 <div class="form-group row">
 <label  class="col-sm-2 col-form-label">Fecha:</label>
 <div class="col-sm-3">
-<input type="date"  class="form-control" name="fecha" value="<?=  date('Y-m-d') ?>" required>
+<input type="date"  class="form-control form-control-sm" name="fecha" value="<?=  date('Y-m-d') ?>" required>
 </div>
 <label  class="col-sm-1 col-form-label">Estado:</label>
 <div class="col-sm-3">
-<select name="estado"  class="estado form-control" required placeholder="Estado"></select>
+<select name="estado"  class="estado form-control form-control-sm" required placeholder="Estado"></select>
 </div>
 </div>
 
 <div class="form-group row">
 <label  class="col-sm-2 col-form-label">Cliente:</label>
-<div class="col-sm-1">
-<button  type="button" class="btn btn-success btn-nuevo-cliente"><i class="fa fa-plus"></i></button>
+<div class="col-sm-2">
+<button  type="button" class="btn btn-success btn-nuevo-cliente btn-sm btn-block"><i class="fa fa-plus"></i> Crear Cliente</button>
 </div>
-<div class="col-sm-9">
+<div class="col-sm-8">
 <select   class="demo-default cliente" name="cliente" required placeholder="Buscar Cliente"></select>
 </div>
 </div>
@@ -45,11 +37,11 @@
 <div class="form-group row">
 <label  class="col-sm-2 col-form-label">Id Order:</label>
 <div class="col-sm-3">
-<input type="text"  class="form-control" name="id_order" pattern="[0-9]+"  minlength="8" maxlength="8" required>
+<input type="text"  class="form-control form-control-sm" name="id_order" pattern="[0-9]+"  minlength="8" maxlength="8" required>
 </div>
 <label  class="col-sm-2 col-form-label">Order Action Id:</label>
 <div class="col-sm-3">
-<input type="text"  class="form-control" name="order_action" pattern="[0-9]+"  minlength="8" maxlength="8" required>
+<input type="text"  class="form-control form-control-sm" name="order_action" pattern="[0-9]+"  minlength="8" maxlength="8" required>
 </div>
 </div>
 
@@ -69,7 +61,7 @@
 <div class="form-group row">
 <label  class="col-sm-2 col-form-label">IMEI:</label>
 <div class="col-sm-5">
-<input type="text" name="imei" class="imei form-control" required readonly>
+<input type="text" name="imei" class="imei form-control form-control-sm" required readonly>
 </div>
 </div>
 
@@ -77,7 +69,7 @@
 <div class="form-group row">
 <label  class="col-sm-2 col-form-label">Operación:</label>
 <div class="col-sm-5">
-<select   class="form-control operacion" name="operacion" required placeholder="Operación"></select>
+<select   class="form-control operacion form-control-sm" name="operacion" required placeholder="Operación"></select>
 </div>
 <div class="col-sm-2">
 <div class="checkbox"><label><input type="checkbox"   class="">Mostrar Todas</label></div>
@@ -99,7 +91,7 @@ class="codigo_biometrico form-control">
 <label  class="col-sm-2 col-form-label label_codigo_tm">Código TM:</label>
 <div class="col-sm-3">
 <input type="text" name="codigo_tm" pattern="[0-9]+" maxlength="17" minlength="17"  
-class="codigo_tm form-control">
+class="codigo_tm form-control form-control-sm">
 </div>
 </div>
 
@@ -125,7 +117,7 @@ class="codigo_tm form-control">
 <div class="form-group row">
 <label  class="col-sm-2 col-form-label">Promoción / Campaña:</label>
 <div class="col-sm-5">
-<select   class="form-control promocion" name="promocion" required placeholder="Promoción / Campaña"></select>
+<select   class="form-control promocion form-control-sm" name="promocion" required placeholder="Promoción / Campaña"></select>
 </div>
 </div>
 
@@ -133,7 +125,7 @@ class="codigo_tm form-control">
 <div class="form-group row">
 <label  class="col-sm-2 col-form-label">ICC:</label>
 <div class="col-sm-5">
-<select   class="form-control icc" name="icc" required placeholder=""></select>
+<select   class="form-control icc form-control-sm" name="icc" required placeholder=""></select>
 </div>
 </div>
 
@@ -149,14 +141,30 @@ class="codigo_tm form-control">
 <div class="form-group row">
 <label  class="col-sm-2 col-form-label">Telefóno:</label>
 <div class="col-sm-3">
-<input type="number"  class="form-control" name="telefono" min="1" required>
+<input type="number"  class="form-control form-control-sm" name="telefono" min="1" required>
 </div>
 </div>
 
 <div class="form-group row">
 <label  class="col-sm-2 col-form-label">A Pagar:</label>
 <div class="col-sm-3">
-<input type="number"  class="form-control"  min="1" step="any" required>
+<input type="number"  class="form-control form-control-sm"  min="1" step="any" required>
+</div>
+</div>
+
+
+<div class="form-group row">
+<label  class="col-sm-2 col-form-label">Forma de Pago:</label>
+<div class="col-sm-3">
+<select name="forma_pago"  class="forma_pago form-control form-control-sm" required></select>
+</div>
+</div>
+
+
+<div class="form-group row">
+<label  class="col-sm-2 col-form-label">Observaciones:</label>
+<div class="col-sm-6">
+<textarea name=""  rows="3" class="form-control form-control-sm"></textarea>
 </div>
 </div>
 
@@ -534,7 +542,22 @@ callback(res);
 
 /*Fin Cargar Clientes */
 
+/*Inicio Carga de Formas de Pago*/
+forma_pago = '<option value="">(Sin Asignar)</option>';
+$.getJSON('sources/operacion.php?op=2',{'tipo':'forma_pago'},function(data){
 
+data.forEach(function (row){
+
+forma_pago += '<option value="'+row.id+'">'+row.Nombre+'</option>';
+
+$('.forma_pago').html(forma_pago);
+
+
+});
+
+});
+
+/*Fin Carga de Formas de Pago */
 
 
 //Cargar Modal Nuevo Cliente

@@ -1,3 +1,7 @@
+<!-- Selectize -->
+<link rel="stylesheet" href="https://selectize.github.io/selectize.js/css/selectize.default.css" >
+<script src="https://selectize.github.io/selectize.js/js/selectize.js"></script>
+
       <div class="row">
       <div class="col-md-12">
          

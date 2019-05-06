@@ -32,9 +32,9 @@ UPPER(e.alias) empresa,
 UPPER(ti.nombre)tienda
 
 
-FROM Trabajadores t  
-LEFT JOIN Empresa e ON t.id_empresa=e.id
-LEFT JOIN Tienda ti ON t.id_tienda=ti.id
+FROM trabajadores t  
+LEFT JOIN empresa e ON t.id_empresa=e.id
+LEFT JOIN tienda ti ON t.id_tienda=ti.id
 
 
 ";
@@ -57,7 +57,7 @@ case  2:
 
 $id  =  $_REQUEST['id'];
 
-$query  = "SELECT * FROM Trabajadores WHERE id=".$id;
+$query  = "SELECT * FROM trabajadores WHERE id=".$id;
 $result = $funciones->query($query)[0];
 
 echo json_encode($result);
@@ -79,7 +79,7 @@ if($_REQUEST['type']=='agregar')
 try {
 	
 
-$query     = "SELECT  * FROM Trabajadores WHERE dni=:dni";
+$query     = "SELECT  * FROM trabajadores WHERE dni=:dni";
 $statement = $conexion->prepare($query);
 $statement->bindParam(':dni',$dni);
 $statement->execute();
@@ -95,7 +95,7 @@ $funciones->message('Dni Duplicado','El DNI ya esta registrado','warning');
 else
 {
 
-$query =  "INSERT INTO Trabajadores(nombres,apellidos,cargo,dni,id_empresa,id_tienda)
+$query =  "INSERT INTO trabajadores(nombres,apellidos,cargo,dni,id_empresa,id_tienda)
 VALUES (:nombres,:apellidos,:cargo,:dni,:id_empresa,:id_tienda)";
 $statement = $conexion->prepare($query);
 $statement->bindParam(':nombres',$nombres);
@@ -131,7 +131,7 @@ $id       = $funciones->validar_xss($_REQUEST['id']);
 
 try {
 	
-$query =  "UPDATE  Trabajadores SET
+$query =  "UPDATE  trabajadores SET
 
  nombres=:nombres,
  apellidos=:apellidos,
@@ -168,7 +168,7 @@ break;
 
 case  4:
 
-$query  = "SELECT id,UPPER(alias)alias,Razon_Social,RUC,Direccion FROM Empresa";
+$query  = "SELECT id,UPPER(alias)alias,Razon_Social,RUC,Direccion FROM empresa";
 $result = $funciones->query($query);
 
 echo json_encode($result);
@@ -178,7 +178,7 @@ break;
 
 case  5:
 
-$query  = "SELECT * FROM Tienda";
+$query  = "SELECT * FROM tienda";
 $result = $funciones->query($query);
 
 echo json_encode($result);

@@ -32,7 +32,7 @@ function login()
 try {
 
 $conexion  = $this->get_conexion();
-$query     = "SELECT * FROM Usuarios WHERE  UPPER(Usuario)=UPPER(:user) AND Pass=:pass 
+$query     = "SELECT * FROM usuarios WHERE  UPPER(Usuario)=UPPER(:user) AND Pass=:pass 
 AND Empresa=:empresa";
 $statement = $conexion->prepare($query);
 $statement->bindParam(':user',$this->user);

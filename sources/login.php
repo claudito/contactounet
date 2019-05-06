@@ -14,7 +14,7 @@ $conexion   =  $conexion->get_conexion();
 switch ($opcion) {
 	case 1:
 
- $query = "SELECT  * FROM Empresa";
+ $query = "SELECT  * FROM empresa";
  $result= $funciones->query($query);
 
  echo json_encode($result);

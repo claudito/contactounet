@@ -20,7 +20,7 @@ case 1:
 header("Content-type: application/json; charset=utf-8");
 
 $query =  "
-SELECT id, Fecha, Operacion, Promocion, Contrato, Modelo, idModelo, IMEI, Telefono, PVP, Codigo, Nombre, NIF, Puntos, Observaciones, idUsuario, Usuario, idCliente, Cliente, ZonaAzul, idPuntoVenta, PuntoVenta, NumFactura, Servicio, idFormaPago, FormaPago, NumAbono, ICC, CodPromocion, IMEIAccesorio1, NombreAccesorio1, CodigoFija, FechaAbono, FechaFactura, Boletin, FechaActivacion, Estado, idSegmento, NombreSegmento, OperadorDonante, TamañoPrevisto, NombreComercial, idComercial, Compromiso FROM Operaciones 
+SELECT id, Fecha, Operacion, Promocion, Contrato, Modelo, idModelo, IMEI, Telefono, PVP, Codigo, Nombre, NIF, Puntos, Observaciones, idUsuario, Usuario, idCliente, Cliente, ZonaAzul, idPuntoVenta, PuntoVenta, NumFactura, Servicio, idFormaPago, FormaPago, NumAbono, ICC, CodPromocion, IMEIAccesorio1, NombreAccesorio1, CodigoFija, FechaAbono, FechaFactura, Boletin, FechaActivacion, Estado, idSegmento, NombreSegmento, OperadorDonante, TamañoPrevisto, NombreComercial, idComercial, Compromiso FROM operaciones 
 
 ";
 $statement = $conexion->query($query);
@@ -55,7 +55,7 @@ switch ($_REQUEST['tipo']) {
 
 CONCAT(UPPER(Nombre),' - ',CIF) name
 
-FROM Clientes WHERE CONCAT(Nombre,CIF) LIKE '%".$name."%'";
+FROM clientes WHERE CONCAT(Nombre,CIF) LIKE '%".$name."%'";
 $result  = $funciones->query($query);
 
 echo json_encode($result);
@@ -64,7 +64,7 @@ echo json_encode($result);
 
     case 'estado':
 
-$query  =  "SELECT id, Nombre FROM EstadosOperaciones";
+$query  =  "SELECT id, Nombre FROM estadosoperaciones";
 $result  = $funciones->query($query);
 
 echo json_encode($result);
@@ -76,7 +76,7 @@ echo json_encode($result);
 
     $name =  trim($_REQUEST['name']);
 
-$query  =  "SELECT id, Modelo Nombre,CopiaDe FROM Terminales WHERE Modelo LIKE '%".$name."%'";
+$query  =  "SELECT id, Modelo Nombre,CopiaDe FROM terminales WHERE Modelo LIKE '%".$name."%'";
 $result  = $funciones->query($query);
 
 echo json_encode($result);
@@ -90,7 +90,7 @@ echo json_encode($result);
 
     $name =  trim($_REQUEST['name']);
 
-$query  =  "SELECT id, Descripcion Nombre FROM Articulos WHERE NombreFamilia='ACCESORIOS'AND Descripcion LIKE '%".$name."%'";
+$query  =  "SELECT id, Descripcion Nombre FROM articulos WHERE NombreFamilia='ACCESORIOS'AND Descripcion LIKE '%".$name."%'";
 $result  = $funciones->query($query);
 
 echo json_encode($result);
@@ -100,7 +100,7 @@ echo json_encode($result);
 
        case  'operacion':
 
-$query  =  "SELECT id, Nombre FROM TipoOperacion";
+$query  =  "SELECT id, Nombre FROM tipooperacion";
 $result  = $funciones->query($query);
 
 echo json_encode($result);
@@ -113,7 +113,7 @@ echo json_encode($result);
 
       $name =  trim($_REQUEST['name']);
 
-$query  =  "SELECT id, Nombre FROM Contrato WHERE Nombre LIKE '%".$name."%'";
+$query  =  "SELECT id, Nombre FROM contrato WHERE Nombre LIKE '%".$name."%'";
 $result  = $funciones->query($query);
 
 echo json_encode($result);
@@ -126,7 +126,7 @@ echo json_encode($result);
 
     $id     = $_REQUEST['id'];
     
-    $query  =  "SELECT  * FROM TipoOperacion WHERE id=".$id;
+    $query  =  "SELECT  * FROM tipooperacion WHERE id=".$id;
     $result =  $funciones->query($query)[0];
 
     echo json_encode($result);
@@ -138,7 +138,7 @@ echo json_encode($result);
 
       $name =  trim($_REQUEST['name']);
 
-$query  =  "SELECT id, Nombre FROM Usuarios WHERE Nombre LIKE '%".$name."%'";
+$query  =  "SELECT id, Nombre FROM usuarios WHERE Nombre LIKE '%".$name."%'";
 $result  = $funciones->query($query);
 
 echo json_encode($result);
@@ -148,7 +148,7 @@ echo json_encode($result);
 
       case  'forma_pago':
 
-$query  = " SELECT id, Nombre, Codigo, EsEfectivo, EsPagado, idSerie FROM FormasPago";
+$query  = " SELECT id, Nombre, Codigo, EsEfectivo, EsPagado, idSerie FROM formaspago";
 $result  = $funciones->query($query);
 
 echo json_encode($result);
@@ -182,7 +182,7 @@ $cif          =  $funciones->validar_xss($_REQUEST['documento']);
 try {
 
 
-$query     =  "SELECT  * FROM Clientes WHERE CIF=:cif";
+$query     =  "SELECT  * FROM clientes WHERE CIF=:cif";
 $statement =  $conexion->prepare($query);
 $statement->bindParam(':cif',$cif);
 $statement->execute();
@@ -197,7 +197,7 @@ $funciones->message("Cliente","Ya Registrado","warning");
 else
 {
 
-$query = "INSERT INTO Clientes(Nombre,CIF,TipoDocumento)VALUES
+$query = "INSERT INTO clientes(Nombre,CIF,TipoDocumento)VALUES
 (:nombre,:cif,:tipo_doc)";
 $statement = $conexion->prepare($query);
 $statement->bindParam(':nombre',$nombres);

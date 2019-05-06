@@ -23,7 +23,7 @@ SELECT
 
 id, Nombre, Contacto, Direccion, Poblacion, CP, Provincia, CIF, Telefono, Fax, Email, NombreCorto, CuentaBanco, Creado, txtCategoria, CodigoCliente, idFPago, FPago, Segmento, TipoDocumento, Nacionalidad
 
-FROM Clientes
+FROM clientes
 
 ";
 $statement = $conexion->query($query);

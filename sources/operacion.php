@@ -229,7 +229,7 @@ $tipo    =  trim($_REQUEST['tipo']);
 
 try {
 
-include'vendor/jossmp/sunatphp/src/autoload.php';
+include'../vendor/jossmp/sunatphp/src/autoload.php';
 $company = new \Sunat\Sunat( true, true );
 
 	//$numero = "10467942820";

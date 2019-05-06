@@ -297,6 +297,86 @@ echo "Error: ".$e->getMessage();
 
 break;
 
+case 6:
+
+$fecha              =  $_REQUEST['fecha'];
+$estado             =  $_REQUEST['estado'];
+$cliente            =  $_REQUEST['cliente'];
+$idorder            =  $_REQUEST['id_order'];
+$orderaction        =  $_REQUEST['order_action'];
+$modelo             =  $_REQUEST['modelo'];
+$imei               =  $_REQUEST['imei'];
+$operacion          =  $_REQUEST['operacion'];
+$codigobiometrico   =  $_REQUEST['codigo_biometrico'];
+$codigotm           =  $_REQUEST['codigo_tm'];
+$comercial          =  $_REQUEST['comercial'];
+$contrato           =  $_REQUEST['contrato'];
+$telefono           =  $_REQUEST['telefono'];
+$pago               =  $_REQUEST['pago'];
+$formapago          =  $_REQUEST['forma_pago'];
+$observacion        =  $_REQUEST['observacion'];
+
+
+try {
+  
+$query =  "INSERT INTO operaciones
+(Fecha,Estado,idCliente,idOrder,orderActionId,Modelo,IMEI,Operacion,codigoBiometrico,codigoTM,NombreComercial,Contrato,Telefono,Pagar,idFormaPago,Observaciones)
+VALUES
+(:fecha,:estado,:cliente,:idorder,:orderaction,:modelo,:imei,:operacion,:codigobiometrico,:codigotm,:comercial,:contrato,:telefono,:pago,:formapago,:observacion)
+";
+$statement = $conexion->prepare($query);
+$statement->bindParam(':fecha',$fecha);
+$statement->bindParam(':estado',$estado);
+$statement->bindParam(':cliente',$cliente);
+$statement->bindParam(':idorder',$idorder);
+$statement->bindParam(':orderaction',$orderaction);
+$statement->bindParam(':modelo',$modelo);
+$statement->bindParam(':imei',$imei);
+$statement->bindParam(':operacion',$operacion);
+$statement->bindParam(':codigobiometrico',$codigobiometrico);
+$statement->bindParam(':codigotm',$codigotm);
+$statement->bindParam(':comercial',$comercial);
+$statement->bindParam(':contrato',$contrato);
+$statement->bindParam(':telefono',$telefono);
+$statement->bindParam(':pago',$pago);
+$statement->bindParam(':formapago',$formapago);
+$statement->bindParam(':observacion',$observacion);
+$statement->execute();
+
+
+echo json_encode(
+
+array(
+
+"title" => "Buen Trabajo",
+"text"  => "Operación Registrada",
+"type"  => "success"
+
+)
+
+);
+
+
+} catch (Exception $e) {
+  
+echo json_encode(
+
+array(
+
+"title" => "Error",
+"text"  => $e->getMessage(),
+"type"  => "error"
+
+)
+
+);
+
+
+
+}
+
+break;
+
 default:
 echo "opción no disponible";
 break;

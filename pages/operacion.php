@@ -1,11 +1,11 @@
 <!-- Formulario de Registro -->
-<form id="registro" autocomplete="off">
+<form id="agregar" autocomplete="off" novalidate>
 
 <div class="card">
 
 
   <div class="card-header">
-  <i class="fa fa-plus"></i>
+  <i class="fa fa-plus"></i> CREAR NUEVA OPERACIÓN
   </div>
 
 <input type="hidden" name="id" class="id">
@@ -117,7 +117,7 @@ class="codigo_tm form-control form-control-sm">
 <div class="form-group row">
 <label  class="col-sm-2 col-form-label">Promoción / Campaña:</label>
 <div class="col-sm-5">
-<select   class="form-control promocion form-control-sm" name="promocion" required placeholder="Promoción / Campaña"></select>
+<select   class="form-control promocion form-control-sm" name="promocion" placeholder="Promoción / Campaña"></select>
 </div>
 </div>
 
@@ -133,7 +133,7 @@ class="codigo_tm form-control form-control-sm">
 <div class="form-group row">
 <label  class="col-sm-2 col-form-label">Accesorio:</label>
 <div class="col-sm-5">
-<select   class="demo-default accesorio" name="accesorio" required placeholder="Accesorio"></select>
+<select   class="demo-default accesorio" name="accesorio"  placeholder="Accesorio"></select>
 </div>
 
 </div>
@@ -141,14 +141,14 @@ class="codigo_tm form-control form-control-sm">
 <div class="form-group row">
 <label  class="col-sm-2 col-form-label">Telefóno:</label>
 <div class="col-sm-3">
-<input type="number"  class="form-control form-control-sm" name="telefono" min="1" required>
+<input type="text" pattern="[0-9]+" maxlength="9" minlength="9"  class="form-control form-control-sm" name="telefono"  required>
 </div>
 </div>
 
 <div class="form-group row">
 <label  class="col-sm-2 col-form-label">A Pagar:</label>
 <div class="col-sm-3">
-<input type="number"  class="form-control form-control-sm"  min="1" step="any" required>
+<input type="number" name="pago" class="form-control form-control-sm"  min="1" step="any" required>
 </div>
 </div>
 
@@ -164,7 +164,7 @@ class="codigo_tm form-control form-control-sm">
 <div class="form-group row">
 <label  class="col-sm-2 col-form-label">Observaciones:</label>
 <div class="col-sm-6">
-<textarea name=""  rows="3" class="form-control form-control-sm"></textarea>
+<textarea name="observacion"  rows="3" class="form-control form-control-sm" required></textarea>
 </div>
 </div>
 
@@ -826,7 +826,7 @@ $('#modal-imei').modal('hide');
 //Capturar Operación seleccionada (código biometrico, código TM)
 $('select.operacion').on('change',function(e){
 
-e.stopImmediatePropagation();
+;
 
 var valor = $(this).val();
 
@@ -880,6 +880,54 @@ $('.codigo_tm').hide();
 
 });
 
+
+//Agregar Operación
+$(document).on('submit','#agregar',function(e){
+
+e.stopImmediatePropagation();
+
+parametros  = $(this).serialize();
+
+$.ajax({
+
+url:"sources/operacion.php?op=6",
+type:"POST",
+data:parametros,
+dataType:"JSON",
+beforeSend:function(){
+
+swal({
+  title: "Cargando",
+  imageUrl:"assets/img/loader2.gif",
+  text:  "Espere un momento, no cierre la ventana.",
+  timer: 3000,
+  showConfirmButton: false
+});
+
+
+},
+success:function(data){
+
+$('#agregar')[0].reset();
+
+swal({
+  title: data.title,
+  text:  data.text,
+  type:  data.type,
+  timer: 3000,
+  showConfirmButton: false
+});
+
+
+}
+
+
+});
+
+
+
+e.preventDefault();
+});
 
 
 

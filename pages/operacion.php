@@ -377,6 +377,7 @@ callback(res);
 /*Fin Cargar Clientes */
 
 
+
 /*Inicio Cargar Estado Operación*/
 estado = '';
 $.getJSON('sources/operacion.php?op=2',{'tipo':'estado'},function(data){
@@ -611,6 +612,14 @@ swal({
   timer: 3000,
   showConfirmButton: false
 });
+
+
+if(data.type=='success')
+{
+
+$('#modal-nuevo-cliente').modal('hide');
+
+}
 
 
 

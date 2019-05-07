@@ -188,7 +188,7 @@ class="codigo_tm form-control form-control-sm">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Nuevo Cliente</h5>
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-user"></i> Nuevo Cliente</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -202,14 +202,15 @@ class="codigo_tm form-control form-control-sm">
     <select name="tipo_doc"  class="tipo_doc form-control">
     <option value="">Seleccionar</option>
     <option value="DNI">DNI</option>
-    <option value="PASAPORTE">PASAPORTE</option>
     <option value="RUC">RUC</option>
+    <option value="PASAPORTE">PASAPORTE</option>
+
     </select>
     </div>
 
 
     <div class="input-group mb-3">
-    <input type="number" class="numero_cliente form-control" placeholder="Ingrese el número" aria-label="Recipient's username" aria-describedby="button-addon2">
+    <input type="number" class="numero_cliente form-control" placeholder="Ingrese el número" >
     <div class="input-group-append">
     <button class="btn btn-outline-secondary btn-buscar-cliente" type="button" >Buscar</button>
     </div>
@@ -223,6 +224,11 @@ class="codigo_tm form-control form-control-sm">
     <input type="text" name="nombres" class="nombres form-control" required>
     </div>
 
+    <div class="form-group">
+    <label>Apellidos</label>
+    <input type="text" name="apellidos" class="apellidos form-control">
+    </div>
+
 
     <div class="form-group">
     <label>Documento</label>
@@ -231,13 +237,9 @@ class="codigo_tm form-control form-control-sm">
 
 
     <div class="form-group">
-    <label>Condición</label>
-    <input type="text" name="condicion" class="condicion form-control" required>
+    <label>Dirección</label>
+    <textarea name="direccion" class="direccion form-control" rows="3" required></textarea>
     </div>
-
-
-
-
 
 
 
@@ -245,7 +247,7 @@ class="codigo_tm form-control form-control-sm">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button class="btn btn-primary">Agregar</button>
+        <button class="btn btn-primary btn-submit-cliente">Agregar</button>
       </div>
     </div>
   </div>
@@ -566,6 +568,8 @@ $(document).on('click','.btn-nuevo-cliente',function (e){
 $('#nuevo-cliente')[0].reset();
  e.stopImmediatePropagation();
 
+   $('.btn-submit-cliente').attr('disabled','disabled');
+
  $('#modal-nuevo-cliente').modal('show');
 
 });
@@ -663,6 +667,27 @@ return false
   }
 
 
+    if(tipo_doc=='PASAPORTE')
+    {
+
+    swal({
+    title: "No existe información disponible",
+    text:  "",
+    type:  "warning",
+    timer: 1000,
+    showConfirmButton: false
+    });
+
+    $('.nombres').val('');
+    $('.apellidos').val('');
+    $('.documento').val('');
+    $('.direccion').val('');
+
+    return false
+    }
+
+
+
 //Envío por ajax
 $.ajax({
 
@@ -684,24 +709,44 @@ swal({
 success:function(data)
 {
 
-
 if(data['success']==true)
 {
 
 $('.nombres').val('');
+$('.apellidos').val('');
 $('.documento').val('');
-$('.condicion').val('');
+$('.direccion').val('');
 
-$('.nombres').val(data['result']['razon_social']);
-$('.documento').val(data['result']['ruc']);
-$('.condicion').val(data['result']['condicion']);
+switch(tipo_doc) {
+  case 'DNI':
+$('.nombres').val(data.result.Nombres);
+$('.apellidos').val(data.result.apellidos);
+$('.documento').val(data.result.DNI);
+$('.direccion').val(data.result.Distrito+' , '+data.result.Provincia);
+$('.btn-submit-cliente').removeAttr('disabled','disabled');
+
+    break;
+  case 'RUC':
+
+$('.nombres').val(data.result.razon_social);
+$('.documento').val(data.result.ruc);
+$('.direccion').val(data.result.direccion);
+$('.btn-submit-cliente').removeAttr('disabled','disabled');
+
+    break;
+
+  default:
+    // code block
+}
+
+
 
 
 swal({
 title: "",
-text:  "Registro encontrado",
+text:  "Consulta Exitosa",
 type:  "success",
-timer: 1000,
+timer: 2000,
 showConfirmButton: false
 });
 
@@ -711,8 +756,12 @@ else
 {
 
 $('.nombres').val('');
+$('.apellidos').val('');
 $('.documento').val('');
-$('.condicion').val('');
+$('.direccion').val('');
+$('.btn-submit-cliente').removeAttr('disabled','disabled');
+$('.btn-submit-cliente').attr('disabled','disabled');
+
 
 swal({
 title: "",
@@ -928,6 +977,9 @@ swal({
 
 e.preventDefault();
 });
+
+
+
 
 
 

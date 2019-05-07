@@ -176,8 +176,11 @@ case  3:
 
 
 $nombres      =  $funciones->validar_xss($_REQUEST['nombres']);
+$apellidos    =  $funciones->validar_xss($_REQUEST['apellidos']);
 $tipo_doc     =  $funciones->validar_xss($_REQUEST['tipo_doc']);
 $cif          =  $funciones->validar_xss($_REQUEST['documento']);
+$nombre       =  $nombres.' '.$apellidos;
+$direccion    =  $funciones->validar_xss($_REQUEST['direccion']);
 
 try {
 
@@ -191,18 +194,21 @@ $result    = $statement->fetchAll(PDO::FETCH_ASSOC);
 if(count($result)>0)
 {
 
-$funciones->message("Cliente","Ya Registrado","warning");
+$funciones->message("Código Duplicado","El Cliente ya esta Registrado","warning");
 
 }
 else
 {
 
-$query = "INSERT INTO clientes(Nombre,CIF,TipoDocumento)VALUES
-(:nombre,:cif,:tipo_doc)";
+$query = "INSERT INTO clientes(Nombre,CIF,TipoDocumento,Nombres,Apellidos,Direccion)VALUES
+(:nombre,:cif,:tipo_doc,:nombres,:apellidos,:direccion)";
 $statement = $conexion->prepare($query);
-$statement->bindParam(':nombre',$nombres);
+$statement->bindParam(':nombre',$nombre);
+$statement->bindParam(':nombres',$nombres);
+$statement->bindParam(':apellidos',$apellidos);
 $statement->bindParam(':cif',$cif);
 $statement->bindParam(':tipo_doc',$tipo_doc);
+$statement->bindParam(':direccion',$direccion);
 $statement->execute();
 
 $funciones->message("Buen Trabajo","Cliente Agregado","success");
@@ -229,16 +235,33 @@ $tipo    =  trim($_REQUEST['tipo']);
 
 try {
 
+error_reporting(0);
+
+if($tipo=='RUC')
+{
+
 include'../vendor/jossmp/sunatphp/src/autoload.php';
 $company = new \Sunat\Sunat( true, true );
 
-	//$numero = "10467942820";
-	
-	$ruc = ( isset($numero))? $numero : false;
-	$search1 = $company->search( $ruc );
-	
-	echo $search1->json();
+$ruc     = ( isset($numero))? $numero : false;
+$search  = $company->search( $ruc );
 
+echo json_encode($search);
+
+}
+else
+{
+
+include'../vendor/jossmp/datos-peru/src/autoload.php';
+
+$reniec = new \reniec\reniec();
+
+$search = $reniec->search( $numero );
+
+echo json_encode($search);
+
+
+}
 	
 } catch (Exception $e) {
 

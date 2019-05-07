@@ -33,7 +33,7 @@ else
 echo "Error Al Cargar el Archivo";
 }
 
-
+/*
 if(file_exists("bak_" . $archivo))
 {
 
@@ -65,8 +65,9 @@ else
 echo "Necesitas primero importar el archivo";
 
 }
+*/
 
-var_dump($_DATOS_EXCEL);
+//var_dump($_DATOS_EXCEL);
 
 	
 unlink($destino);

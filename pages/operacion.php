@@ -48,7 +48,7 @@
 <div class="form-group row">
 <label  class="col-sm-2 col-form-label">Modelo:</label>
 <div class="col-sm-5">
-<select   class="demo-default modelo" name="modelo" required placeholder="Modelo"></select>
+<select   class="form-control modelo" name="modelo" required placeholder="Modelo"></select>
 </div>
 <div class="col-sm-2">
 <div class="checkbox"><label><input type="checkbox"   class="" checked>Mostrar Solo Stock</label></div>
@@ -98,7 +98,7 @@ class="codigo_tm form-control form-control-sm">
 <div class="form-group row">
 <label  class="col-sm-2 col-form-label">Comercial:</label>
 <div class="col-sm-5">
-<select   class="demo-default comercial" name="comercial" required placeholder="Sin Asignar"></select>
+<select   class="form-control comercial form-control-sm" name="comercial" required placeholder="Sin Asignar"></select>
 </div>
 </div>
 
@@ -107,7 +107,7 @@ class="codigo_tm form-control form-control-sm">
 <div class="form-group row">
 <label  class="col-sm-2 col-form-label">Contrato:</label>
 <div class="col-sm-5">
-<select   class="demo-default contrato" name="contrato" required placeholder="Contrato"></select>
+<select   class="form-control contrato form-control-sm" name="contrato" required placeholder="Contrato"></select>
 </div>
 </div>
 
@@ -133,7 +133,7 @@ class="codigo_tm form-control form-control-sm">
 <div class="form-group row">
 <label  class="col-sm-2 col-form-label">Accesorio:</label>
 <div class="col-sm-5">
-<select   class="demo-default accesorio" name="accesorio"  placeholder="Accesorio"></select>
+<select   class="form-control accesorio form-control-sm" name="accesorio"  placeholder="Accesorio"></select>
 </div>
 
 </div>
@@ -396,35 +396,18 @@ $('.estado').val('PREVENTA');
 /*Fin Cargar Estado Operación */
 
 /*Inicio Cargar de Modelos*/
-$('.modelo').selectize({
-maxItems: 1,
-valueField: 'Nombre',
-labelField: 'Nombre',
-searchField: 'Nombre',
-options: [],
-create: false,
-load: function(query, callback) {
-if (!query.length) return callback();
 
-$.ajax({
-url: 'sources/operacion.php?op=2',
-type: 'GET',
-dataType: 'json',
-data: {
-name: query,'tipo':'modelo'
-},
-error: function() {
-callback();
-},
-success: function(res) {
-callback(res);
+modelo = '<option value="">Seleccionar</option>';
+$.getJSON('sources/operacion.php?op=2',{'tipo':'modelo'},function(data){
 
-console.log(res);
 
-}
+data.forEach(function (row){
+
+modelo += '<option value="'+row.Modelo+'">'+row.Modelo+'</option>';
+
+$('.modelo').html(modelo);
+
 });
-
-}
 
 });
 
@@ -432,32 +415,17 @@ console.log(res);
 /*Fin Cargar de Modelos */
 
 /*Inicio Cargar de Accesorios*/
-$('.accesorio').selectize({
-maxItems: 1,
-valueField: 'Nombre',
-labelField: 'Nombre',
-searchField: 'Nombre',
-options: [],
-create: false,
-load: function(query, callback) {
-if (!query.length) return callback();
+accesorio = '<option value="">Seleccionar</option>';
+$.getJSON('sources/operacion.php?op=2',{'tipo':'accesorio'},function(data){
 
-$.ajax({
-url: 'sources/operacion.php?op=2',
-type: 'GET',
-dataType: 'json',
-data: {
-name: query,'tipo':'accesorio'
-},
-error: function() {
-callback();
-},
-success: function(res) {
-callback(res);
-}
+
+data.forEach(function (row){
+
+accesorio += '<option value="'+row.Nombre+'">'+row.Nombre+'</option>';
+
+$('.accesorio').html(accesorio);
+
 });
-
-}
 
 });
 
@@ -482,64 +450,35 @@ $('.operacion').html(operacion);
 
 
 /*Inicio Carga de Contratos*/
-$('.contrato').selectize({
-maxItems: 1,
-valueField: 'Nombre',
-labelField: 'Nombre',
-searchField: 'Nombre',
-options: [],
-create: false,
-load: function(query, callback) {
-if (!query.length) return callback();
+contrato = '<option value="">Seleccionar</option>';
+$.getJSON('sources/operacion.php?op=2',{'tipo':'contrato'},function(data){
 
-$.ajax({
-url: 'sources/operacion.php?op=2',
-type: 'GET',
-dataType: 'json',
-data: {
-name: query,'tipo':'contrato'
-},
-error: function() {
-callback();
-},
-success: function(res) {
-callback(res);
-}
-});
 
-}
+data.forEach(function (row){
+
+contrato += '<option value="'+row.Nombre+'">'+row.Nombre+'</option>';
+
+$('.contrato').html(contrato);
 
 });
+
+});
+
 
 /*Fin Carga de Contratos */
 
-/*Inicio Cargar Clientes*/
-$('.comercial').selectize({
-maxItems: 1,
-valueField: 'Nombre',
-labelField: 'Nombre',
-searchField: 'Nombre',
-options: [],
-create: false,
-load: function(query, callback) {
-if (!query.length) return callback();
+/*Inicio Cargar Comercial*/
+comercial = '<option value="">Seleccionar</option>';
+$.getJSON('sources/operacion.php?op=2',{'tipo':'vendedor'},function(data){
 
-$.ajax({
-url: 'sources/operacion.php?op=2',
-type: 'GET',
-dataType: 'json',
-data: {
-name: query,'tipo':'vendedor'
-},
-error: function() {
-callback();
-},
-success: function(res) {
-callback(res);
-}
+
+data.forEach(function (row){
+
+comercial += '<option value="'+row.Nombre+'">'+row.Nombre+'</option>';
+
+$('.comercial').html(comercial);
+
 });
-
-}
 
 });
 

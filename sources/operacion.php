@@ -74,11 +74,11 @@ echo json_encode($result);
 
     case  'modelo':
 
-    $name =  trim($_REQUEST['name']);
+    //$name =  trim($_REQUEST['name']);
 
 $query  =  "SELECT  Modelo,NombrePuntoVenta,Stock,Modelo Nombre FROM  (
-SELECT  Modelo,NombrePuntoVenta,count(IMEI)Stock FROM detalleCompras WHERE NombrePuntoVenta='TEX SAN JUAN 1176'
-GROUP BY Modelo,NombrePuntoVenta  ) s  WHERE Modelo LIKE '%".$name."%'";
+SELECT  Modelo,NombrePuntoVenta,count(IMEI)Stock FROM detallecompras 
+GROUP BY Modelo,NombrePuntoVenta  ) s  WHERE NombrePuntoVenta ='SAN JUAN 1176'";
 $result  = $funciones->query($query);
 
 echo json_encode($result);
@@ -90,9 +90,9 @@ echo json_encode($result);
 
     case  'accesorio':
 
-    $name =  trim($_REQUEST['name']);
+   // $name =  trim($_REQUEST['name']);
 
-$query  =  "SELECT id, Descripcion Nombre FROM articulos WHERE NombreFamilia='ACCESORIOS'AND Descripcion LIKE '%".$name."%'";
+$query  =  "SELECT id, Descripcion Nombre FROM articulos WHERE NombreFamilia='ACCESORIOS'";
 $result  = $funciones->query($query);
 
 echo json_encode($result);
@@ -113,9 +113,9 @@ echo json_encode($result);
 
         case  'contrato':
 
-      $name =  trim($_REQUEST['name']);
+      //$name =  trim($_REQUEST['name']);
 
-$query  =  "SELECT id, Nombre FROM contrato WHERE Nombre LIKE '%".$name."%'";
+$query  =  "SELECT id, Nombre FROM contrato";
 $result  = $funciones->query($query);
 
 echo json_encode($result);
@@ -138,9 +138,9 @@ echo json_encode($result);
 
       case  'vendedor':
 
-      $name =  trim($_REQUEST['name']);
+     // $name =  trim($_REQUEST['name']);
 
-$query  =  "SELECT id, Nombre FROM usuarios WHERE Nombre LIKE '%".$name."%'";
+$query  =  "SELECT id, Nombre FROM usuarios";
 $result  = $funciones->query($query);
 
 echo json_encode($result);

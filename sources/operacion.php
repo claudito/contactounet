@@ -345,7 +345,7 @@ $observacion        =  $_REQUEST['observacion'];
 try {
   
 $query =  "INSERT INTO operaciones
-(Fecha,Estado,idCliente,idOrder,orderActionId,Modelo,IMEI,Operacion,codigoBiometrico,codigoTM,NombreComercial,Contrato,Telefono,Pagar,idFormaPago,Observaciones)
+(Fecha,Estado,idCliente,idOrder,orderActionId,Modelo,IMEI,Operacion,codigoBiometrico,codigoTM,NombreComercial,Contrato,Telefono,Pagar,FormaPago,Observaciones)
 VALUES
 (:fecha,:estado,:cliente,:idorder,:orderaction,:modelo,:imei,:operacion,:codigobiometrico,:codigotm,:comercial,:contrato,:telefono,:pago,:formapago,:observacion)
 ";

@@ -1,12 +1,3 @@
-<?php 
-
-$fechaini = strtotime ( '-3 day' , strtotime ( date('Y-m-d') ) ) ;
-$fechaini = date ( 'Y-m-d' , $fechaini );
-$fechafin = date('Y-m-d');
-
- ?>
-
-
 
 <!-- Selectize -->
 <link rel="stylesheet" href="https://selectize.github.io/selectize.js/css/selectize.default.css" >
@@ -19,9 +10,9 @@ $fechafin = date('Y-m-d');
   
 <form id="busqueda" autocomplete="off" class="form-inline">
   
-<input type="date" name="fechaini" class="form-control fechaini" required value="<?= $fechaini ?>">
+<input type="date" name="fechaini" class="form-control fechaini" required >
 
-<input type="date" name="fechafin" class="form-control fechafin" required value="<?= $fechafin ?>">
+<input type="date" name="fechafin" class="form-control fechafin" required >
 
 
 <button class="btn btn-primary"><i class="fa fa-search"></i></button>
@@ -72,15 +63,20 @@ $fechafin = date('Y-m-d');
 
 </div>
 
-
-
-
-
 <script>
-function loadData(fechaini,fechafin)
+
+
+function loadData(fechaini='',fechafin='')
 {
 
- $(document).ready(function (){
+$(document).ready(function (){
+
+$.getJSON('sources/registro.php?op=2',{},function(data){
+
+ $('.fechaini').val(data.fechaini);
+ $('.fechafin').val(data.fechafin);
+
+});
 
 //$("#consulta").dataTable().fnDestroy();
 $('#consulta').dataTable({
@@ -134,7 +130,7 @@ return '';
 
 }
 //Cargar Data
-loadData('<?= $fechaini ?>','<?= $fechafin ?>');
+loadData();
 
 
 //Busqueda

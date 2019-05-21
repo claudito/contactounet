@@ -1,31 +1,29 @@
-<?php 
-
-//include'vendor/autoload.php';
 
 
-try {
-
-include'vendor/jossmp/sunatphp/src/autoload.php';
-$company = new \Sunat\Sunat( true, true );
-
-	$numero = "10467942820";
-	
-	$ruc = ( isset($numero))? $numero : false;
-	$search1 = $company->search( $ruc );
-	
-	echo $search1->json();
-
-	
-} catch (Exception $e) {
-
-echo "Error: ".$e->getMessage();
-
-	
- }
-
-
-
-
- ?>
-
-
+ r.ID
+,r.FECHA_TRABAJO
+,r.FECHA_PRODUCCION
+,r.FECHA_TRABAJO_F
+,r.FECHA_PRODUCCION_F
+,r.HORA_INICIO
+,r.HORA_FIN
+,r.HORAS_TRABAJO
+,r.HORAS_HOMBRE
+,r.DETALLE
+,r.OBSERVACION
+,r.OT
+,r.CANTIDAD_OT
+,r.CODIGO_TURNO
+,r.DNI_USUARIO
+,r.CLASIFICACION
+,r.PROCESOS
+,r.MAQUINA
+,r.CODIGO_INTERNO
+,r.USUARIO
+,r.TIPO
+,r.IDTIPO
+,r.FECHA_CREACION
+,r.ESTADO
+,r.SUB_OT
+,r.CHECK_MAQUINA
+,r.PERIODO

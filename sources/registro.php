@@ -21,15 +21,26 @@ switch ($opcion) {
 header("Content-type: application/json; charset=utf-8");
 
 
+if(empty($_REQUEST['fechaini']))
+{
+
+$fechaini = $funciones->first_day(date('Y-m-d'));
+$fechafin = $funciones->last_day(date('Y-m-d'));
+
+}
+else
+{
+
 $fechaini = trim($_REQUEST['fechaini']);
 $fechafin = trim($_REQUEST['fechafin']);
 
+}
 
 $query =  "
 SELECT 
 o.id,
 DATE_FORMAT(o.Fecha,'%d/%m/%Y')Fecha,
-t.Nombre Operacion,
+o.Operacion,
 o.Promocion,
 o.Contrato,
 o.Modelo,
@@ -75,8 +86,7 @@ CAST(o.Pagar AS DECIMAL(8,2))Pagar,
 o.userCreate
 
 FROM operaciones o
-INNER JOIN tipooperacion t ON o.Operacion=t.id
-INNER JOIN clientes c ON o.idCliente=c.id
+LEFT JOIN clientes c ON o.idCliente=c.id
 
 WHERE DATE_FORMAT(o.Fecha,'%Y-%m-%d') BETWEEN :fechaini AND :fechafin";
 $statement = $conexion->prepare($query);
@@ -93,6 +103,25 @@ $results = ["sEcho" => 1,
            ];
 echo json_encode($results);
 		break;
+
+
+case  2:
+
+
+echo json_encode(
+
+array(
+
+'fechaini' => $funciones->first_day(date('Y-m-d')),
+'fechafin' => $funciones->last_day(date('Y-m-d'))
+
+)
+
+
+);
+
+
+break;
 	
 	default:
 	echo "opción no disponible";

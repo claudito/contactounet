@@ -20,57 +20,56 @@ $dateCreate = date('Y-m-d H:i:s');
 switch ($opcion) {
 		case 1:
 
+//cargamos el archivo al servidor con el mismo nombre
+//solo le agregue el sufijo bak_ 
 $archivo   = $_FILES['archivo']['name'];
 $tipo      = $_FILES['archivo']['type'];
 $destino   = "bak_" . $archivo;
-
 if (copy($_FILES['archivo']['tmp_name'], $destino))
 {
-echo "Archivo Cargado Con Éxito";
+#echo "Archivo Cargado Con Éxito";
 }
 else
 {
 echo "Error Al Cargar el Archivo";
 }
-
-/*
-if(file_exists("bak_" . $archivo))
+if (file_exists("bak_" . $archivo)) 
 {
-
 // Cargando la hoja de cálculo
 $objReader = new PHPExcel_Reader_Excel2007();
 $objPHPExcel = $objReader->load("bak_" . $archivo);
 $objFecha = new PHPExcel_Shared_Date();
 // Asignar hoja de excel activa
-$objPHPExcel->getSheetByName('Hoja 1');
-
-for ($i = 2; $i <= 10; $i++)
+$objPHPExcel->setActiveSheetIndex(0);
+// Llenamos el arreglo con los datos  del archivo xlsx
+for ($i = 3; $i <= $_REQUEST['fila']; $i++)
 {
-
-$_DATOS_EXCEL[$i]['a'] = $objPHPExcel->getActiveSheet()->getCell('A' . $i)->getCalculatedValue();
+$_DATOS_EXCEL[$i]['a']    = $objPHPExcel->getActiveSheet()->getCell('A' . $i)->getCalculatedValue();
 $_DATOS_EXCEL[$i]['b'] = $objPHPExcel->getActiveSheet()->getCell('B' . $i)->getCalculatedValue();
 $_DATOS_EXCEL[$i]['c'] = $objPHPExcel->getActiveSheet()->getCell('C' . $i)->getCalculatedValue();
 $_DATOS_EXCEL[$i]['d'] = $objPHPExcel->getActiveSheet()->getCell('D' . $i)->getCalculatedValue();
 $_DATOS_EXCEL[$i]['e'] = $objPHPExcel->getActiveSheet()->getCell('E' . $i)->getCalculatedValue();
 $_DATOS_EXCEL[$i]['f'] = $objPHPExcel->getActiveSheet()->getCell('F' . $i)->getCalculatedValue();
-$_DATOS_EXCEL[$i]['g'] = $objPHPExcel->getActiveSheet()->getCell('G' . $i)->getCalculatedValue();
-
 }
-
-
-
 }
-else
+//si por algo no cargo el archivo bak_ 
+else 
 {
 echo "Necesitas primero importar el archivo";
-
 }
-*/
+$errores = 0;
+//recorremos el arreglo multidimensional 
+//para ir recuperando los datos obtenidos
+//del excel e ir insertandolos en la BD
 
-//var_dump($_DATOS_EXCEL);
+var_dump($_DATOS_EXCEL);
 
-	
+
+
 unlink($destino);
+
+
+
 
 		break;
 	

@@ -23,7 +23,7 @@ $query =  "
 SELECT 
 o.id,
 DATE_FORMAT(o.Fecha,'%d/%m/%Y')Fecha,
-t.Nombre Operacion,
+o.Operacion,
 o.Promocion,
 o.Contrato,
 o.Modelo,
@@ -46,7 +46,7 @@ o.PuntoVenta,
 o.NumFactura,
 o.Servicio,
 o.idFormaPago,
-fp.Nombre FormaPago,
+o.FormaPago,
 o.NumAbono,
 o.ICC,
 o.CodPromocion,
@@ -72,13 +72,7 @@ o.codigoTM,
 CAST(o.Pagar AS decimal(8,2))Pagar
 FROM operaciones o 
 
-INNER JOIN tipooperacion t ON o.Operacion=t.id
-
-INNER JOIN clientes c ON o.idCliente=c.id
-
-INNER JOIN formaspago fp ON o.idFormaPago=fp.id
-
-
+LEFT JOIN clientes c ON o.idCliente=c.id
 ";
 $statement = $conexion->query($query);
 $statement->execute();
@@ -95,7 +89,23 @@ echo json_encode($results);
 
 break;
 
+case  2:
 
+
+echo json_encode(
+
+array(
+
+'fechaini' => $funciones->first_day(date('Y-m-d')),
+'fechafin' => $funciones->last_day(date('Y-m-d'))
+
+)
+
+
+);
+
+
+break;
 
 
 default:

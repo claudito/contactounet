@@ -1,5 +1,16 @@
+<script>
+swal({
+  title: "Cargando Información",
+  imageUrl:"assets/img/loader2.gif",
+  text:  "Espere un momento, no cierre la ventana.",
+  timer: 2000,
+  showConfirmButton: false
+});
+
+</script>
+
 <!-- Formulario de Registro -->
-<form id="agregar" autocomplete="off" novalidate>
+<form id="agregar" autocomplete="off" >
 
 <div class="card">
 
@@ -125,7 +136,7 @@ class="codigo_tm form-control form-control-sm">
 <div class="form-group row">
 <label  class="col-sm-2 col-form-label">ICC:</label>
 <div class="col-sm-5">
-<select   class="form-control icc form-control-sm" name="icc" required placeholder=""></select>
+<select   class="form-control icc form-control-sm" name="icc"  placeholder=""></select>
 </div>
 </div>
 
@@ -437,7 +448,7 @@ $.getJSON('sources/operacion.php?op=2',{'tipo':'operacion'},function(data){
 
 data.forEach(function (row){
 
-operacion += '<option value="'+row.id+'">'+row.Nombre+'</option>';
+operacion += '<option value="'+row.Nombre+'">'+row.Nombre+'</option>';
 
 $('.operacion').html(operacion);
 
@@ -490,7 +501,7 @@ $.getJSON('sources/operacion.php?op=2',{'tipo':'forma_pago'},function(data){
 
 data.forEach(function (row){
 
-forma_pago += '<option value="'+row.id+'">'+row.Nombre+'</option>';
+forma_pago += '<option value="'+row.Nombre+'">'+row.Nombre+'</option>';
 
 $('.forma_pago').html(forma_pago);
 

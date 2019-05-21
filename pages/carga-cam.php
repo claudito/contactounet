@@ -2,31 +2,36 @@
 <div class="row">
   
 <div class="col-md-12">
- <h2>Instrucciones:</h2><hr>
-<ol>
-<li>Descargar Archivo CAM.xlsb</li>
-<li>Convertir a xlsx en la web : <a href="https://xlsb-to-xlsx.file-converter-online.com/" target="_blank">https://xlsb-to-xlsx.file-converter-online.com/</a></li>
-<li>A descargar el Archivo confirmar la reparación</li>
-<li>Listo!!!! Ahora Si, Cargar El archivo</li>
-</ol>
 
 
+<form id="agregar" autocomplete="off" >
 
-<form id="agregar" autocomplete="off" class="form-inline">
-	
-<div class="input-group">
-	<input type="file" class="form-control" name="archivo" required>
-	<span class="input-group-btn">
-		<button type="submit" class="btn btn-primary"><i class="fa fa-upload"></i> Importar</button>
-	</span>
+<div class="card">
+  <div class="card-header">
+   <i class="fa fa-file-excel-o"></i> CAM PREPAGO
+  </div>
+  <div class="card-body">
+
+  <div class="form-group">
+  <label >Archivo Excel</label>
+  <input type="file" class="form-control" name="archivo" required>
+  </div>
+
+
+  <div class="form-group">
+  <label>Número de Filas</label>
+  <input type="number" name="fila" class="form-control" required min="1">
+  </div>
+
+  </div>
+
+  <div class="card-footer">
+  
+  <button type="submit"  class="btn btn-primary"><i class="fa fa-upload"></i>  Subir</button>
+
+  </div>
+
 </div>
-
-
-<select name="	" id="">
-<option value="	">EQUIVALENCIAS +SIMPLE</option>
-<option value="	">PRECIO FULL</option>
-<option value="	">Generica AD</option>
-</select>
 
 </form>
   

@@ -363,9 +363,32 @@ array(
    );
 
  
+}
 
+
+function first_day($fecha)
+{
+
+$fecha = new DateTime($fecha);
+$fecha->modify('first day of this month');
+return $fecha->format('Y-m-d'); // imprime por ejemplo: 01/12/2012
 
 }
+
+function last_day($fecha)
+{
+
+$fecha = new DateTime($fecha);
+$fecha->modify('last day of this month');
+return  $fecha->format('Y-m-d'); // imprime por ejemplo: 31/12/2012
+
+}
+
+
+
+
+
+
 
 
 }

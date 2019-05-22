@@ -25,9 +25,16 @@ switch ($opcion) {
 $archivo   = $_FILES['archivo']['name'];
 $tipo      = $_FILES['archivo']['type'];
 $destino   = "bak_" . $archivo;
+
+
+
 if (copy($_FILES['archivo']['tmp_name'], $destino))
 {
-#echo "Archivo Cargado Con Éxito";
+echo "Archivo Cargado Con Éxito";
+
+//Asignación de Permiso Archivo
+chmod($destino, 0777);
+
 }
 else
 {
@@ -37,10 +44,12 @@ if (file_exists("bak_" . $archivo))
 {
 // Cargando la hoja de cálculo
 $objReader = new PHPExcel_Reader_Excel2007();
-$objPHPExcel = $objReader->load("bak_" . $archivo);
+//$objPHPExcel = $objReader->load("bak_" . $archivo);
+$objPHPExcel = $objReader->load($destino);
 $objFecha = new PHPExcel_Shared_Date();
 // Asignar hoja de excel activa
 $objPHPExcel->setActiveSheetIndex(0);
+
 // Llenamos el arreglo con los datos  del archivo xlsx
 for ($i = 3; $i <= $_REQUEST['fila']; $i++)
 {
@@ -79,6 +88,19 @@ unlink($destino);
 
 		break;
 }
+
+
+try {
+
+
+
+	
+} catch (Exception $e) {
+	
+echo "Eror: ".$e->getMessage();
+
+}
+
 
 
 

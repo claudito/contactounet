@@ -23,6 +23,12 @@
   <input type="number" name="fila" class="form-control" required min="1">
   </div>
 
+
+  <div class="form-group">
+  <label>Fecha de Carga</label>
+  <input type="date" name="fecha_carga" class="form-control" required>
+  </div>
+
   </div>
 
   <div class="card-footer">

@@ -20,13 +20,14 @@ $dateCreate = date('Y-m-d H:i:s');
 switch ($opcion) {
 		case 1:
 
+$fila        =  $_REQUEST['fila'];
+$fecha_carga =  $_REQUEST['fecha_carga'];
+
 //cargamos el archivo al servidor con el mismo nombre
 //solo le agregue el sufijo bak_ 
 $archivo   = $_FILES['archivo']['name'];
 $tipo      = $_FILES['archivo']['type'];
 $destino   = "bak_" . $archivo;
-
-
 
 if (copy($_FILES['archivo']['tmp_name'], $destino))
 {
@@ -51,7 +52,7 @@ $objFecha = new PHPExcel_Shared_Date();
 $objPHPExcel->setActiveSheetIndex(0);
 
 // Llenamos el arreglo con los datos  del archivo xlsx
-for ($i = 3; $i <= $_REQUEST['fila']; $i++)
+for ($i = 3; $i <= $fila; $i++)
 {
 $_DATOS_EXCEL[$i]['a']    = $objPHPExcel->getActiveSheet()->getCell('A' . $i)->getCalculatedValue();
 $_DATOS_EXCEL[$i]['b'] = $objPHPExcel->getActiveSheet()->getCell('B' . $i)->getCalculatedValue();

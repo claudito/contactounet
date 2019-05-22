@@ -3,7 +3,7 @@ swal({
   title: "Cargando Información",
   imageUrl:"assets/img/loader2.gif",
   text:  "Espere un momento, no cierre la ventana.",
-  timer: 2000,
+  timer: 12000,
   showConfirmButton: false
 });
 

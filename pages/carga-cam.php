@@ -74,8 +74,8 @@ swal({
   title: "Buen Trabajo",
   text:  "Archivo Cargado",
   type:  "success",
-  timer: 3000,
-  showConfirmButton: false
+  //timer: 3000,
+  showConfirmButton: true
 });
 
 
